@@ -18,10 +18,7 @@ from source.base import point_cloud
 
 
 def _to_unit_cube(mesh: trimesh.Trimesh):
-
     bounds = mesh.extents
-    if bounds.min() == 0.0:
-        return
 
     # translate to origin
     translation = (mesh.bounds[0] + mesh.bounds[1]) * 0.5
