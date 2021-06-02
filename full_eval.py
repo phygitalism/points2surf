@@ -66,13 +66,17 @@ def full_eval(opt):
         new_meshes_dir_abs = os.path.join(res_dir_rec, 'mesh')
         ref_meshes_dir_abs = os.path.join(opt.indir, '03_meshes')
         csv_file = os.path.join(res_dir_rec, 'hausdorff_dist_pred_rec.csv')
-        evaluation.mesh_comparison(
-            new_meshes_dir_abs=new_meshes_dir_abs,
-            ref_meshes_dir_abs=ref_meshes_dir_abs,
-            num_processes=opt.workers,
-            report_name=csv_file,
-            samples_per_model=10000,
-            dataset_file_abs=os.path.join(opt.indir, opt.dataset))
+
+        if os.path.isdir(ref_meshes_dir_abs):
+            evaluation.mesh_comparison(
+                new_meshes_dir_abs=new_meshes_dir_abs,
+                ref_meshes_dir_abs=ref_meshes_dir_abs,
+                num_processes=opt.workers,
+                report_name=csv_file,
+                samples_per_model=10000,
+                dataset_file_abs=os.path.join(opt.indir, opt.dataset))
+        else:
+            print("Skip comparsion")
 
 
 if __name__ == '__main__':
